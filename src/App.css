@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes pulse3d {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.animate-pulse3d {
+  animation: pulse3d 0.6s infinite;
+}
+
 .imgs {
   animation: focusEffect 1s infinite alternate;
   mix-blend-mode: screen;  /* Or any blend mode of your choice */
