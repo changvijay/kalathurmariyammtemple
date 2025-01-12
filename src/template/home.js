@@ -2,7 +2,13 @@
 import { useState, useEffect } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { useAuth0 } from "@auth0/auth0-react";
+import AuthSection from "./AuthSection";
 import styled from 'styled-components';
+import './home.css'
+
+
+
 
 const StyledWrapper = styled.div`
 display: flex;
@@ -22,13 +28,13 @@ align-items: center;
   transform: scale(1); /* Keep other cards normal scale */
 }
 `;
+
 const Card = styled.div`
 display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
 text-align: center;
-height: 400px;
 width: 100%;
 max-width: 600px; /* Limit the max width of the cards */
 border-radius: 10px;
@@ -75,6 +81,7 @@ p.second-text {
   }
 }
 `;
+
 export  function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [businessType, setBusinessType] = useState("அம்பிகை மாரியம்மன் அருளால் நலம் மற்றும் பாதுகாப்பு பெறுங்கள்.");
@@ -94,12 +101,20 @@ export  function Home() {
     }, 3500);
     return () => clearInterval(interval);
   }, []);
-
+  const {
+    isLoading,isAuthenticated
+  } = useAuth0();
+  if (isLoading && isAuthenticated) {
+    return <div>Loading...</div>;
+  }
   return (
     < >
       {/* nave bar */}
       <header className="absolute inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
+        <nav
+          aria-label="Global"
+          className="flex items-center justify-between p-6 lg:px-8"
+        >
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
               <img
@@ -120,16 +135,14 @@ export  function Home() {
               <Bars3Icon aria-hidden="true" className="size-6" />
             </button>
           </div>
-
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="/" className="text-sm/6 font-semibold text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </a>
+            <AuthSection />
           </div>
         </nav>
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden ">
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            
             <div className="flex items-center justify-between">
               <a href="/" className="-m-1.5 p-1.5">
                 <span className="sr-only">mariyamman</span>
@@ -148,22 +161,19 @@ export  function Home() {
                 <XMarkIcon aria-hidden="true" className="size-6" />
               </button>
             </div>
+
+            {/* Mobile Auth Section */}
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-gray-500/10">
-
                 <div className="py-6">
-                  <a
-                    href="/"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                  >
-                    Log in
-                  </a>
+                  <AuthSection />
                 </div>
               </div>
             </div>
           </DialogPanel>
         </Dialog>
       </header>
+
       {/* hero section */}
       <div className="relative isolate px-6 pt-14 lg:px-8">
         <div
@@ -181,7 +191,7 @@ export  function Home() {
         <div className=" w-full py-8 sm:py-10 lg:py-8">
           <div className="sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Welcome to Kalathur mariyamman temple
+             {} Welcome to Kalathur mariyamman temple
             </div>
           </div>
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -198,7 +208,7 @@ export  function Home() {
               <div className="mt-10 flex items-center gap-x-6">
                 <a
                   href="/payment"
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-md block bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                  
                   Donate
@@ -209,9 +219,9 @@ export  function Home() {
             {/* Image Section */}
             <div className="flex justify-center lg:w-1/1 lg:justify-end relative p-4 bg-gold imgs">
               <img
-                src="/pngwing.png" // Replace with your image URL
+                src="/pngwing.png"
                 alt="Description"
-                className="w-full rounded  focus:outline-none focus:ring-4 focus:ring-gold focus:ring-opacity-50 hover:scale-105 transition-transform duration-500"
+                className="w-full block rounded  focus:outline-none focus:ring-4 focus:ring-gold focus:ring-opacity-50 hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
@@ -231,38 +241,130 @@ export  function Home() {
           />
         </div>
       </div>
+
+      {/* social media icons */}
+      <div className="soc block">
+  <ul>
+    <li>
+      <a 
+        href="https://www.youtube.com/channel/UCzar0OCX91zwYqBnYsC-ymA" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="YouTube Channel"
+      >
+        <i className="fab fa-youtube" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a 
+        href="https://www.instagram.com/kalathurmariamman/profilecard/?igsh=MXF0aTlwYmkxYTNlNQ==" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Instagram Profile"
+      >
+        <i className="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a 
+        href="https://www.facebook.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Facebook Page"
+      >
+        <i className="fab fa-facebook" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a 
+        href="https://www.twitter.com" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        aria-label="Twitter Profile"
+      >
+        <i className="fab fa-twitter" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+      </div>
+
       {/* 3 img section */}
       <center>
-        <StyledWrapper className='flex justify-center relative p-4'>
+        <StyledWrapper className='flex justify-center block relative p-4'>
           <Card  tabIndex="0">
             <img
               src="/1.jpeg"
               alt="Batman and VR headset"
-              className="rounded-lg object-cover w-full h-64"  // Set fixed height for all images
+              className="rounded-lg w-full block h-64"  
             />
           </Card>
           <Card tabIndex="0">
             <img
               src="/2.jpeg"
               alt="Batman and VR headset"
-              className="rounded-lg object-cover w-full h-64"  // Set fixed height for all images
+              className="rounded-l w-full block h-64" 
             />
           </Card>
           <Card  tabIndex="0">
             <img
-              src="/3.jpeg"
+              src="/3.png"
               alt="Batman and VR headset"
-              className="rounded-lg object-cover w-full h-64"  // Set fixed height for all images
+              className="rounded-lg w-full block h-64"  
             />
           </Card>
         </StyledWrapper>
 
       </center>
-      {/* main-section */}
-      <div className='flex justify-center'>
-        <div className="flex flex-col lg:flex-row justify-between items-center bg-gradient-to-r from-black to-yellow-500 text-white rounded-lg shadow-lg w-full m-10 p-5 h-auto">
 
-          {/* Left content section */}
+     
+      {/* slider */}
+      <div id="default-carousel" class="relative w-full" data-carousel="slide">
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+              <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/mariyaman.png" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              </div>
+              <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/pngwing.png" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              </div>
+              <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/3.png" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              </div>
+              <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/pudhariaman.jpg" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              </div>
+              <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/kuluthiyaman.jpg" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              </div>
+          </div>
+          <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+              <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+          </div>
+          <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                  </svg>
+                  <span class="sr-only">Previous</span>
+              </span>
+          </button>
+          <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                  </svg>
+                  <span class="sr-only">Next</span>
+              </span>
+          </button>
+      </div>
+
+
+      {/* main-section */}
+      <div className='flex block justify-center'>
+        <div className="flex flex-col lg:flex-row justify-between items-center bg-gradient-to-r from-black to-yellow-500 text-white rounded-lg shadow-lg w-full m-10 p-5 h-auto">
           <div className="w-full lg:w-1/2 mb-5 lg:mb-0">
             <div className="bg-red-600 text-white text-xs font-bold py-1 px-2 rounded inline-block mb-3">
               Bundle offer
@@ -278,19 +380,62 @@ export  function Home() {
               Learn more
             </a>
           </div>
-
-          {/* Right image section */}
           <div className="w-full lg:w-1/2 flex justify-center items-center relative">
             <img
               src="/pngwing.png"
               alt="Batman and VR headset"
-              className="rounded-lg object-contain w-full h-auto"
+              className="rounded-lg sectionimg object-contain h-auto"
             />
           </div>
         </div>
       </div >
+      
+      {/* z-section */}
+      <div className="container mx-auto  z-container">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Row 1 Title</h2>
+            <p className="text-gray-700">
+              This is the description for the first row. On desktop, the text is on the left, and the image is on the right.
+            </p>
+          </div>
+          <center>
+          <img src="/1.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
+          </center>
+          
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center mt-10">
+          <center>
+          <img src="/3.png" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
+          </center>
+          
+          <div>
+            <h2 className="text-xl font-bold mb-4">Row 2 Title</h2>
+            <p className="text-gray-700">
+              This is the description for the second row. On desktop, the image is on the left, and the text is on the right.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center mt-10">
+          <div>
+            <h2 className="text-xl font-bold mb-4">Row 3 Title</h2>
+            <p className="text-gray-700">
+              This is the description for the third row. On desktop, the text is on the left, and the image is on the right.
+            </p>
+          </div>
+          <center>
+          <img src="/2.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
+          </center>
+          
+        </div>
+
+      </div>
+
       {/* events section */}
-      <div className="relative flex justify-center p-5" style={{width: "95%"}}>
+      <div className="relative flex justify-center p-5" style={{width: "100%"}}>
           {/* Central Line */}
           <div className="absolute w-1 bg-gray-300 dark:bg-gray-700 h-full left-1/2 transform -translate-x-1/2"></div>
 
@@ -303,7 +448,7 @@ export  function Home() {
             ].map((item, index) => (
               <li
                 key={index}
-                className={`mb-10 flex w-full items-center ${
+                className={`mb-10 flex w-full block items-center ${
                   index % 2 === 0
                     ? "lg:justify-start justify-center"
                     : "lg:justify-end justify-center"
@@ -341,11 +486,11 @@ export  function Home() {
               </li>
             ))}
           </ol>
-        </div>
+      </div>
 
       {/* about section */}
       <div className="flex flex-wrap justify-center items-center m-10 gap-6">
-        <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+        <div className="relative block flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
           <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
             <img src="/pudhariaman.jpg" alt="card-image" />
           </div>
@@ -361,7 +506,7 @@ export  function Home() {
               Read more
             </button>
           </div>
-        </div> <div className="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+        </div> <div className="relative block flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
           <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
             <img src="/kuluthiyaman.jpg" alt="card-image" />
           </div>
@@ -381,9 +526,9 @@ export  function Home() {
           </div>
         </div>
       </div>
-
+ 
       {/* footer section */}
-      <footer className="bg-white dark:bg-gray-900">
+      <footer className="bg-white dark:bg-gray-900 block">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between">
           <div className="mb-6 md:mb-0">
@@ -526,8 +671,7 @@ export  function Home() {
           </div>
         </div>
       </div>
-    </footer>
-
+      </footer>
     </>
   )
 }

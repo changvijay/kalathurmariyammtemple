@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css'
 import './payment.css'
-import axios from "axios";
 
 const Modal = ({ isOpen, closeModal, timeOfDay, formData, setFormData, handleSubmit }) => {
   const [alertVisible, setAlertVisible] = useState(false);
@@ -10,7 +9,7 @@ const Modal = ({ isOpen, closeModal, timeOfDay, formData, setFormData, handleSub
     const number = parseInt(e.target.value);
     if (number > 5) {
       setAlertVisible(true);
-      setTimeout(() => setAlertVisible(false), 3000); // Hide alert after 3 seconds
+      setTimeout(() => setAlertVisible(false), 3000); 
     } else {
       const newFormData = Array.from({ length: number }, () => ({ name: '', rashi: '', nakshatra: '' }));
       setFormData(newFormData);
@@ -221,69 +220,15 @@ const Payment = () => {
     if (time === 'evening') setIsEveningModalOpen(false);
     if (time === 'night') setIsNightModalOpen(false);
   };
-  const initPay = (data) => {
-    console.log("Payment Data:", data);  // Log the payment data for debugging
-
-    const options = {
-      key: "rzp_test_wXeis65sVjvtLj",
-      amount: data.peopleCount,
-      currency: "INR",
-      name: "temp",
-      description: "Test",
-      order_id: data.id, // Ensure this is not undefined
-      handler: async (response) => {
-        try {
-          console.log("Razorpay Response:", response); // Log the response from Razorpay
-          const verifyURL = "http://localhost:5000/verify";
-          const { data } = await axios.post(verifyURL, response);
-          console.log("Verification Response:", data);
-        } catch (error) {
-          console.log(error);
-        }
-      },
-      theme: {
-        color: "#3399cc",
-      },
-    };
-    const rzp1 = new window.Razorpay(options);
-    rzp1.open();
-  };
-
-
-
-
+  
   const handleMorningSubmit = async (e) => {
     e.preventDefault();
     const peopleCount = morningData.length * 50;
-    console.log('Morning Data:', morningData, peopleCount);
-    try {
-      const response = await fetch('http://localhost:5000/create-payment', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ morningData, peopleCount }),
-      });
-      const responseData = await response.json();
-      console.log(responseData);
-      initPay(responseData.data);
-      
-
-      if (response.ok) {
-          const result = await response.json();
-          console.log('Server Response:', result);
-      } else {
-          console.error('Failed to send data:', response.statusText);
-      }
-  } catch (error) {
-      console.error('Error sending data:', error);
-  }
+    console.log('Evening Data:', morningData, peopleCount);
     setMorningData([{ name: '', rashi: '', nakshatra: '' }]);
-    closeModal('morning');
+    closeModal('evening');
   };
-
-
-  
+ 
 
   const handleEveningSubmit = (e) => {
     e.preventDefault();
