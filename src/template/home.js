@@ -7,9 +7,6 @@ import AuthSection from "./AuthSection";
 import styled from 'styled-components';
 import './home.css'
 
-
-
-
 const StyledWrapper = styled.div`
 display: flex;
 gap: 15px; /* Add spacing between cards */
@@ -243,51 +240,51 @@ export  function Home() {
       </div>
 
       {/* social media icons */}
-      <div className="soc block">
-  <ul>
-    <li>
-      <a 
-        href="https://www.youtube.com/channel/UCzar0OCX91zwYqBnYsC-ymA" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        aria-label="YouTube Channel"
-      >
-        <i className="fab fa-youtube" aria-hidden="true"></i>
-      </a>
-    </li>
-    <li>
-      <a 
-        href="https://www.instagram.com/kalathurmariamman/profilecard/?igsh=MXF0aTlwYmkxYTNlNQ==" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        aria-label="Instagram Profile"
-      >
-        <i className="fab fa-instagram" aria-hidden="true"></i>
-      </a>
-    </li>
-    <li>
-      <a 
-        href="https://www.facebook.com" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        aria-label="Facebook Page"
-      >
-        <i className="fab fa-facebook" aria-hidden="true"></i>
-      </a>
-    </li>
-    <li>
-      <a 
-        href="https://www.twitter.com" 
-        target="_blank" 
-        rel="noopener noreferrer" 
-        aria-label="Twitter Profile"
-      >
-        <i className="fab fa-twitter" aria-hidden="true"></i>
-      </a>
-    </li>
-  </ul>
-      </div>
-
+      <center className="soc block justify-items-center">
+        <ul>
+          <li>
+            <a 
+              href="https://www.youtube.com/channel/UCzar0OCX91zwYqBnYsC-ymA" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="YouTube Channel"
+            >
+              <i className="fab fa-youtube" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://www.instagram.com/kalathurmariamman/profilecard/?igsh=MXF0aTlwYmkxYTNlNQ==" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Instagram Profile"
+            >
+              <i className="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://www.facebook.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Facebook Page"
+            >
+              <i className="fab fa-facebook" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a 
+              href="https://www.twitter.com" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Twitter Profile"
+            >
+              <i className="fab fa-twitter" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </center>
+      
       {/* 3 img section */}
       <center>
         <StyledWrapper className='flex justify-center block relative p-4'>
@@ -316,69 +313,64 @@ export  function Home() {
 
       </center>
 
-     
       {/* slider */}
-      <div id="default-carousel" class="relative w-full" data-carousel="slide">
-          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-              <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/mariyaman.png" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+      <div id="default-carousel" className="relative w-full" data-carousel="slide">
+          <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+              <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/mariyaman.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
               </div>
-              <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/2.jpeg" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/pngwing.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
               </div>
-              <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/3.png" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/3.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
               </div>
-              <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/kuluthiyaman.jpg" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/pudhariaman.jpg" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
               </div>
-              <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/2.jpeg" class="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+              <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                  <img src="/kuluthiyaman.jpg" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
               </div>
           </div>
-          <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-              <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-              <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+          <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
+              <button type="button" className="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
+              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
+              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
+              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
+              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
           </div>
-          <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor"  strokeLinecap="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
                   </svg>
-                  <span class="sr-only">Previous</span>
+                  <span className="sr-only">Previous</span>
               </span>
           </button>
-          <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-              <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                  <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                      <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
                   </svg>
-                  <span class="sr-only">Next</span>
+                  <span className="sr-only">Next</span>
               </span>
           </button>
       </div>
-
 
       {/* main-section */}
       <div className='flex block justify-center'>
         <div className="flex flex-col lg:flex-row justify-between items-center bg-gradient-to-r from-black to-yellow-500 text-white rounded-lg shadow-lg w-full m-10 p-5 h-auto">
           <div className="w-full lg:w-1/2 mb-5 lg:mb-0">
-            <div className="bg-red-600 text-white text-xs font-bold py-1 px-2 rounded inline-block mb-3">
-              Bundle offer
+            <div className="bg-red-600 text-white text-xs font-bold py-5 px-5 rounded inline-block mb-3">
+            Welcome to Kalathur Mariamman Temple
             </div>
-            <h1 className="text-2xl font-bold">Welcome to Kalathur Mariamman Temple</h1>
             <div className="text-sm mt-2 mb-4">
               A spiritual haven preserving the cultural and historical essence of Tamil Nadu. <br />
-              <div className="p-4 text-sm italic font-normal text-gray-500 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-600 dark:border-gray-500 dark:text-gray-300">
-                Join us for the grand Maha Kumbhabhishekam ceremony on June 26, 2024, asacred event to bless the temple.
+              <div className="p-4 text-sm italic font-normal border border-gray-200 rounded-lg bg-gray-50" style={{color:'black'}}>
+                Join us for the grand Maha Kumbhabhishekam ceremony on June 26, 2025, asacred event to bless the temple.
               </div>
             </div>
-            <a href="/" className="text-blue-400 font-bold hover:underline">
-              Learn more
-            </a>
+            
           </div>
           <div className="w-full lg:w-1/2 flex justify-center items-center relative">
             <img
@@ -395,41 +387,35 @@ export  function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center">
           <div>
-            <h2 className="text-xl font-bold mb-4">Row 1 Title</h2>
-            <p className="text-gray-700">
-              This is the description for the first row. On desktop, the text is on the left, and the image is on the right.
+            <p className="text-justify">
+            மாரியம்மன் சொல்கிறாள்: ‘மக்களே, உங்கள் வாழ்வின் மகத்துவம் பிறருக்கு உதவுவதிலும், அவர்கள் துன்பங்களில் கருணையுடன் செயல்படுவதிலும் தான் உள்ளது. உங்கள் மனதில் அமைதியையும், உங்கள் செயல்களில் பரப்பும் ஒளியையும் ஊட்டுங்கள். மற்றவர்களின் துயரங்களை நீக்குவது, தெய்வீகத்துடன் உங்கள் வாழ்க்கையை இணைப்பதாக இருக்கும்.
             </p>
           </div>
           <center>
-          <img src="/1.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
-          </center>
-          
+          <img src="/1.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" /> 
+          </center>         
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center mt-10">
-          <center>
-          <img src="/3.png" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
-          </center>
-          
+        <center>
+          <img src="/3.png" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />   
+          </center>       
           <div>
-            <h2 className="text-xl font-bold mb-4">Row 2 Title</h2>
-            <p className="text-gray-700">
-              This is the description for the second row. On desktop, the image is on the left, and the text is on the right.
+            <p className="text-justify">
+            மாரியம்மன் உபதேசிக்கிறார்: ‘எப்போதும் உங்கள் சகோதரரைப் போல பிறரைப் பாருங்கள். துன்பம் அவர்களை சுற்றியிருக்கும்போது, உங்கள் கரங்களால் ஆதரவளிக்கவும். இதுவே உண்மையான மனம் கொண்ட மனிதனின் பண்பும், கடவுளின் வரமும் ஆகும்.
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center mt-10">
           <div>
-            <h2 className="text-xl font-bold mb-4">Row 3 Title</h2>
-            <p className="text-gray-700">
-              This is the description for the third row. On desktop, the text is on the left, and the image is on the right.
+            <p className="text-justify">
+            மாரியம்மன் கூறுகிறாள்: ‘அன்பே உங்கள் சக்தி. பிறர் துன்பத்தில் இருக்கும் போது அவர்களைப் பாதுகாக்குங்கள். நீங்கள் செய்வதற்கு திரும்பும் நன்மைகள் உங்கள் வாழ்க்கையைச் சிறப்பாக்கும். பக்தியில் மட்டுமல்ல, உதவியிலும் தெய்வத்தை காணுங்கள்.
             </p>
           </div>
           <center>
           <img src="/2.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
           </center>
-          
         </div>
 
       </div>
@@ -498,15 +484,14 @@ export  function Home() {
             <h6 className="mb-2 text-slate-800 text-xl font-semibold">
               குளுத்தினாயம்மன்: கிராமங்களின் பாதுகாவலரும் அருளாளருமாக
             </h6>
-            <p className="text-slate-600 leading-normal font-light">
+            <p className="text-slate-600 leading-normal text-justify font-light">
               குளுத்தினாயம்மன், கிராமங்களை பாதுகாக்கும் சக்தியாயிருப்பவர், ஆரோக்கியம், செழிப்பு மற்றும் சமரசத்தை அருள்வார். அவரின் அருள் கிராம மக்களை துன்பத்திலிருந்து காப்பாற்றி, செழிப்புக்கும் உறுதிக்கும் வழி வகுக்கின்றது. அவர் பக்தர்களுக்கு உறுதி மற்றும் நம்பிக்கையின் அடையாளமாக, சமாதானம் மற்றும் சக்தி அளிக்கிறார். கிராமங்களில் நிகழும் திருவிழாக்கள் மற்றும் பூஜைகள் மூலம் அவர் அனைத்து மக்களுக்கும் அருள் பரப்புகிறார்.    </p>
           </div>
           <div className="px-4 pb-4 pt-0 mt-2">
-            <button className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-              Read more
-            </button>
+            
           </div>
-        </div> <div className="relative block flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
+        </div> 
+        <div className="relative block flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
           <div className="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
             <img src="/kuluthiyaman.jpg" alt="card-image" />
           </div>
@@ -514,15 +499,13 @@ export  function Home() {
             <h6 className="mb-2 text-slate-800 text-xl font-semibold">
               புதாரியம்மன்: கிராமத்தின் காவல் தேவியும் பரிபாலகியும்
             </h6>
-            <p className="text-slate-600 leading-normal font-light">
+            <p className="text-slate-600 text-justify leading-normal font-light">
               புதாரியம்மன்: கிராமத்தின் காவல் தேவியும் பரிபாலகியும்
               புதாரியம்மன், கிராம மக்களின் பாதுகாவலராக, ஆரோக்கியம் மற்றும் செழிப்பை பரிசளிக்கிறார். அவர் வாழ்ந்த கிராமங்களில் மக்கள் ஒருமித்துக் கொள்வதற்கும், வாழ்வின் அனைத்து பிரச்னைகளையும் எதிர்கொள்வதற்கும் தன்னை காப்பாற்றி அருள் வழங்குகிறார். அவரது அருள், கிராமங்களை சோர்வு மற்றும் துன்பங்களிலிருந்து பாதுகாக்கும் சக்தியாய் பிரகடனமாக உள்ளது.
             </p>
           </div>
           <div className="px-4 pb-4 pt-0 mt-2">
-            <button className="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none" type="button">
-              Read more
-            </button>
+            
           </div>
         </div>
       </div>

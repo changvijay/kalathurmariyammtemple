@@ -1,305 +1,184 @@
-import React, { useState } from 'react';
-import '../App.css'
-import './payment.css'
+import React, { useState } from "react";
+import { QRCodeCanvas } from "qrcode.react";
 
-const Modal = ({ isOpen, closeModal, timeOfDay, formData, setFormData, handleSubmit }) => {
-  const [alertVisible, setAlertVisible] = useState(false);
+function UpiPayment() {
+  const [amount, setAmount] = useState("");
+  const [customerUpi, setCustomerUpi] = useState("");
+  const [status, setStatus] = useState("");
+  const [showQR, setShowQR] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleNumPeopleChange = (e) => {
-    const number = parseInt(e.target.value);
-    if (number > 5) {
-      setAlertVisible(true);
-      setTimeout(() => setAlertVisible(false), 3000); 
-    } else {
-      const newFormData = Array.from({ length: number }, () => ({ name: '', rashi: '', nakshatra: '' }));
-      setFormData(newFormData);
+  const upiID = "changvijay54-1@oksbi";
+  const yourName = "mariyaman"; 
+
+  const sendPaymentRequest = () => {
+    if (!amount || amount <= 0) {
+      alert("Please provide a amount.");
+      return;
     }
+    setShowQR(true);
+    setIsSubmitted(true); 
+    setStatus(`Payment request initiated for ₹${amount} to ${customerUpi}.`);
   };
 
-  const handleInputChange = (e, index, field) => {
-    const updatedFormData = [...formData];
-    updatedFormData[index][field] = e.target.value;
-    setFormData(updatedFormData);
+  const getUpiURL = () => {
+    return `upi://pay?pa=${upiID}&pn=${yourName}&mc=&tid=&tr=&tn=Payment&am=${amount}&cu=INR&url=`;
   };
 
-  if (!isOpen) return null;
+  const handleSendToCustomerUpi = () => {
+    if (!customerUpi || !amount) {
+      alert("Please provide valid details.");
+      return;
+    }
+    const upiLink = `upi://pay?pa=${customerUpi}&pn=Customer&mc=&tid=&tr=&tn=Payment Request&am=${amount}&cu=INR`;
+    window.location.href = upiLink;
+  };
 
   return (
-    <div className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96 max-h-[80vh] overflow-y-auto relative">
-        <h2 className="text-xl font-semibold mb-4">{`${timeOfDay} Process`}</h2>
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <div className="mb-4">
-            <label htmlFor="numPeople" className="block text-sm font-medium text-gray-700">Number of People</label>
-            <input
-              type="number"
-              id="numPeople"
-              value={formData.length === 0 ? '' : formData.length}
-              onChange={handleNumPeopleChange}
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-            />
-          </div>
+<div
+  className="justify-items-center"
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    backgroundColor: "#f0f0f0",
+    backgroundImage: "url('/pudhariaman.jpg')",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center"
+  }}
+>
+  <div
+    style={{
+      padding: "20px",
+      fontFamily: "Arial, sans-serif",
+      background: "rgba(255, 255, 255, 0.5)",
+      boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
+      backdropFilter: "blur(10px)",
+      WebkitBackdropFilter: "blur(10px)",
+      borderRadius: "10px",
+      border: "1px solid rgba(255, 255, 255, 0.18)",
+      maxWidth: "600px",
+      width: "90%", // Ensure responsiveness
+    }}
+  >
+    <h1>UPI Payment</h1>
 
-          <div className="space-y-4">
-            {formData.map((data, index) => (
-              <div key={index} className="space-y-2">
-                {/* for name */}
-                <div>
-                  <label htmlFor={`name-${index}`} className="block text-sm font-medium text-gray-700">Name</label>
-                  <input
-                    type="text"
-                    id={`name-${index}`}
-                    value={data.name}
-                    onChange={(e) => handleInputChange(e, index, 'name')}
-                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                    required
-                  />
-                </div>
-                {/* for rashi */}
-                <div>
-                  <label htmlFor={`rashi-${index}`} className="block text-sm font-medium text-gray-700">Rashi</label>
-                  <select
-                    id={`rashi-${index}`}
-                    value={data.rashi}
-                    onChange={(e) => handleInputChange(e, index, 'rashi')}
-                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                    required
-                  >
-                    <option value="">Select Rashi</option>
-                    <option value="மேடம் (Mesham)">மேடம் (Mesham)</option>
-                    <option value="ரோகிணி (Rohini)">ரோகிணி (Rohini)</option>
-                    <option value="மிதுனம் (Midhunam)">மிதுனம் (Midhunam)</option>
-                    <option value="கடகம் (Kataka)">கடகம் (Kataka)</option>
-                    <option value="சிம்மம் (Simham)">சிம்மம் (Simham)</option>
-                    <option value="கன்னி (Kanni)">கன்னி (Kanni)</option>
-                    <option value="துலாம் (Thulam)">துலாம் (Thulam)</option>
-                    <option value="விருச்சிகம் (Viruchigam)">விருச்சிகம் (Viruchigam)</option>
-                    <option value="தனுசு (Dhanusu)">தனுசு (Dhanusu)</option>
-                    <option value="மகரம் (Makaram)">மகரம் (Makaram)</option>
-                    <option value="கும்பம் (Kumbam)">கும்பம் (Kumbam)</option>
-                    <option value="மீனம் (Meenam)">மீனம் (Meenam)</option>
-                  </select>
-                </div>
-                {/* for nakshatra */}
-                <div>
-                  <label htmlFor={`nakshatra-${index}`} className="block text-sm font-medium text-gray-700">Nakshatra</label>
-                  <select
-                    id={`nakshatra-${index}`}
-                    value={data.nakshatra}
-                    onChange={(e) => handleInputChange(e, index, 'nakshatra')}
-                    className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-                    required
-                  >
-                    <option value="">Select Nakshatra</option>
-                    {data.rashi === "மேடம் (Mesham)" && (
-                      <>
-                        <option value="அச்சுவினி (Ashwini)">அச்சுவினி (Ashwini)</option>
-                        <option value="பரணி (Bharani)">பரணி (Bharani)</option>
-                        <option value="கிருத்திகை (Krittika)">கிருத்திகை (Krittika)</option>
-                      </>
-                    )}
-                    {data.rashi === "ரோகிணி (Rohini)" && (
-                      <>
-                        <option value="மிருகசீரிடம் (Mrigashira)">மிருகசீரிடம் (Mrigashira)</option>
-                        <option value="திருவாதிரை (Thiruvadhirai)">திருவாதிரை (Thiruvadhirai)</option>
-                      </>
-                    )}
-                    {data.rashi === "மிதுனம் (Midhunam)" && (
-                      <>
-                        <option value="புனர்பூசம் (Punarvasu)">புனர்பூசம் (Punarvasu)</option>
-                        <option value="பூசம் (Pushya)">பூசம் (Pushya)</option>
-                        <option value="ஆயிலியம் (Ashlesha)">ஆயிலியம் (Ashlesha)</option>
-                      </>
-                    )}
-                    {data.rashi === "கடகம் (Kataka)" && (
-                      <>
-                        <option value="மகம் (Magha)">மகம் (Magha)</option>
-                        <option value="பூரம் (Pooram)">பூரம் (Pooram)</option>
-                        <option value="உத்தரம் (Uttaram)">உத்தரம் (Uttaram)</option>
-                      </>
-                    )}
-                    {data.rashi === "சிம்மம் (Simham)" && (
-                      <>
-                        <option value="அத்தம் (Atham)">அத்தம் (Atham)</option>
-                        <option value="சித்திரை (Chitra)">சித்திரை (Chitra)</option>
-                        <option value="சோதி (Swathi)">சோதி (Swathi)</option>
-                      </>
-                    )}
-                    {data.rashi === "கன்னி (Kanni)" && (
-                      <>
-                        <option value="விசாகம் (Vishakha)">விசாகம் (Vishakha)</option>
-                        <option value="அனுசம் (Anuradha)">அனுசம் (Anuradha)</option>
-                        <option value="கேட்டை (Kettai)">கேட்டை (Kettai)</option>
-                      </>
-                    )}
-                    {data.rashi === "துலாம் (Thulam)" && (
-                      <>
-                        <option value="மூலம் (Mula)">மூலம் (Mula)</option>
-                        <option value="பூராடம் (Purvashada)">பூராடம் (Purvashada)</option>
-                        <option value="உத்திராடம் (Uttarashada)">உத்திராடம் (Uttarashada)</option>
-                      </>
-                    )}
-                    {data.rashi === "விருச்சிகம் (Viruchigam)" && (
-                      <>
-                        <option value="திருவோணம் (Thiruvonam)">திருவோணம் (Thiruvonam)</option>
-                        <option value="அவிட்டம் (Avittam)">அவிட்டம் (Avittam)</option>
-                        <option value="சதயம் (Sadayam)">சதயம் (Sadayam)</option>
-                      </>
-                    )}
-                    {data.rashi === "தனுசு (Dhanusu)" && (
-                      <>
-                        <option value="பூரட்டாதி (Purvabhadrapada)">பூரட்டாதி (Purvabhadrapada)</option>
-                        <option value="உத்திரட்டாதி (Uttarabhadrapada)">உத்திரட்டாதி (Uttarabhadrapada)</option>
-                        <option value="ரேவதி (Revati)">ரேவதி (Revati)</option>
-                      </>
-                    )}
-                    {data.rashi === "மகரம் (Makaram)" && (
-                      <>
-                        <option value="அச்சுவினி (Ashwini)">அச்சுவினி (Ashwini)</option>
-                        <option value="பரணி (Bharani)">பரணி (Bharani)</option>
-                        <option value="கிருத்திகை (Krittika)">கிருத்திகை (Krittika)</option>
-                      </>
-                    )}
-                    {data.rashi === "கும்பம் (Kumbam)" && (
-                      <>
-                        <option value="ரோகிணி (Rohini)">ரோகிணி (Rohini)</option>
-                        <option value="மிருகசீரிடம் (Mrigashira)">மிருகசீரிடம் (Mrigashira)</option>
-                        <option value="திருவாதிரை (Thiruvadhirai)">திருவாதிரை (Thiruvadhirai)</option>
-                      </>
-                    )}
-                    {data.rashi === "மீனம் (Meenam)" && (
-                      <>
-                        <option value="புனர்பூசம் (Punarvasu)">புனர்பூசம் (Punarvasu)</option>
-                        <option value="பூசம் (Pushya)">பூசம் (Pushya)</option>
-                        <option value="ஆயிலியம் (Ashlesha)">ஆயிலியம் (Ashlesha)</option>
-                      </>
-                    )}
-                  </select>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex justify-between mt-4">
-            <button type="button" onClick={closeModal} className="px-4 py-2 bg-gray-500 text-white rounded-md">
-              Close
-            </button>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md">
-              Submit
-            </button>
-          </div>
-        </form>
-
-        {alertVisible && (
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-500 text-white p-4 rounded-lg shadow-lg animate-pulse3d">
-            <p className="text-center">Number must be less than or equal to 5!</p>
-          </div>
-        )}
-      </div>
+    <div>
+      <label>
+        <strong>Enter Amount:</strong>
+      </label>
+      <input
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        placeholder="Enter amount"
+        style={{ margin: "0 10px" }}
+        disabled={isSubmitted}
+      />
     </div>
-  );
-};
 
-const Payment = () => {
-  const [isMorningModalOpen, setIsMorningModalOpen] = useState(false);
-  const [isEveningModalOpen, setIsEveningModalOpen] = useState(false);
-  const [isNightModalOpen, setIsNightModalOpen] = useState(false);
+    <button
+      onClick={sendPaymentRequest}
+      style={{
+        marginTop: "20px",
+        padding: "10px 20px",
+        cursor: isSubmitted ? "not-allowed" : "pointer",
+        backgroundColor: isSubmitted ? "#ccc" : "#007bff",
+        color: isSubmitted ? "#666" : "#fff",
+      }}
+      disabled={isSubmitted}
+    >
+      {isSubmitted ? "Request Sent" : "Send Payment Request"}
+    </button>
 
-  const [morningData, setMorningData] = useState([{ name: '', rashi: '', nakshatra: '' ,slot:'Morning'}]);
-  const [eveningData, setEveningData] = useState([{ name: '', rashi: '', nakshatra: '',slot:'evening' }]);
-  const [nightData, setNightData] = useState([{ name: '', rashi: '', nakshatra: '',slot:'nightData' }]);
+    {showQR && (
+      <div className="justify-items-center" style={{ marginTop: "20px" }}>
+        <h3>Scan this QR Code to Pay:</h3>
+        <QRCodeCanvas value={getUpiURL()} size={200} />
+      </div>
+    )}
 
-  const openModal = (time) => {
-    if (time === 'morning') setIsMorningModalOpen(true);
-    if (time === 'evening') setIsEveningModalOpen(true);
-    if (time === 'night') setIsNightModalOpen(true);
-  };
+    <div style={{ marginTop: "20px", color: "green" }}>
+      {status && <p>{status}</p>}
+    </div>
 
-  const closeModal = (time) => {
-    if (time === 'morning') setIsMorningModalOpen(false);
-    if (time === 'evening') setIsEveningModalOpen(false);
-    if (time === 'night') setIsNightModalOpen(false);
-  };
-  
-  const handleMorningSubmit = async (e) => {
-    e.preventDefault();
-    const peopleCount = morningData.length * 50;
-    console.log('Evening Data:', morningData, peopleCount);
-    setMorningData([{ name: '', rashi: '', nakshatra: '' }]);
-    closeModal('evening');
-  };
- 
+    {isSubmitted && (
 
-  const handleEveningSubmit = (e) => {
-    e.preventDefault();
-    const peopleCount = morningData.length * 50;
-    console.log('Evening Data:', eveningData, peopleCount);
-    setEveningData([{ name: '', rashi: '', nakshatra: '' }]);
-    closeModal('evening');
-  };
+      
 
-  const handleNightSubmit = (e) => {
-    e.preventDefault();
-    const peopleCount = morningData.length * 50;
-    console.log('Night Data:', nightData, peopleCount);
-    setNightData([{ name: '', rashi: '', nakshatra: '' }]);
-    closeModal('night');
-  };
 
-  return (
-    <div className="p-4 space-y-4 payment">
-      <center>
-        <div className='slotname'>
+      <div style={{ marginTop: "20px", color: "#007bff" }}>
 
+<div style={{ marginTop: "10px" }}>
+          <label>
+            <strong>Customer UPI ID:</strong>
+          </label>
+          <input
+            type="text"
+            value={customerUpi}
+            onChange={(e) => setCustomerUpi(e.target.value)}
+            placeholder="Enter UPI ID"
+            style={{ margin: "0 10px" }}
+          />
+        </div>
+
+        <div className="justify-items-center" style={{ marginTop: "10px" }}>
           <button
-            onClick={() => openModal('morning')}
-            className="px-4 py-2 bg-green-500 text-white rounded-md p-5 m-5"
+            onClick={handleSendToCustomerUpi}
+            style={{
+              padding: "10px 20px",
+              backgroundColor: "#28a745",
+              color: "white",
+              border: "none",
+              cursor: "pointer",
+              width: "100%",
+            }}
           >
-            12:00 PM-1:00 PM darchanai /தர்ச்சனை
-          </button> <br/>
+            Send Payment Request
+          </button>
+        </div>
+        <p>
+          Please take a screenshot and share it via WhatsApp: 710747878
+        </p>
+        <div className="justify-items-center">
           <button
-            onClick={() => openModal('evening')}
-            className="px-4 py-2 bg-orange-500 text-white rounded-md p-5 m-5"
+            aria-label="Chat on WhatsApp"
+            style={{
+              backgroundColor: "#25D366",
+              border: "none",
+              borderRadius: "5px",
+              padding: "10px 20px",
+              color: "white",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+            onClick={() =>
+              window.open(
+                "https://wa.me/917010747878",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
           >
-            1:00 PM-2:00 PM darchanai /தர்ச்சனை
-          </button> <br/>
-          <button
-            onClick={() => openModal('night')}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md  p-5 m-5"
-          >
-            2:00 PM-3:00 PM darchanai /தர்ச்சனை
+            <img
+              alt="Chat on WhatsApp"
+              src="https://static-00.iconduck.com/assets.00/whatsapp-icon-2040x2048-8b5th74o.png"
+              style={{ width: "30px", height: "auto" }}
+            />
+            Chat on WhatsApp
           </button>
         </div>
 
-      </center>
+      </div>
+    )}
+  </div>
+</div>
 
-
-      <Modal
-        isOpen={isMorningModalOpen}
-        closeModal={() => closeModal('morning')}
-        timeOfDay="Morning"
-        formData={morningData}
-        setFormData={setMorningData}
-        handleSubmit={handleMorningSubmit}
-      />
-      <Modal
-        isOpen={isEveningModalOpen}
-        closeModal={() => closeModal('evening')}
-        timeOfDay="Evening"
-        formData={eveningData}
-        setFormData={setEveningData}
-        handleSubmit={handleEveningSubmit}
-      />
-      <Modal
-        isOpen={isNightModalOpen}
-        closeModal={() => closeModal('night')}
-        timeOfDay="Night"
-        formData={nightData}
-        setFormData={setNightData}
-        handleSubmit={handleNightSubmit}
-      />
-    </div>
   );
-};
+}
 
-export default Payment;
+export default UpiPayment;
