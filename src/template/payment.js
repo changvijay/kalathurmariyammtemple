@@ -30,7 +30,8 @@ function UpiPayment() {
       alert("Please provide valid details.");
       return;
     }
-    const upiLink = `upi://pay?pa=${customerUpi}&pn=Customer&mc=&tid=&tr=&tn=Payment Request&am=${amount}&cu=INR`;
+    const upiLink = `upi://pay?pa=${upiID}&pn=Customer&mc=&tid=&tr=&tn=Payment Request&am=${amount}&cu=INR`;
+    console.log(upiLink)
     window.location.href = upiLink;
   };
 

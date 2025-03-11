@@ -4,6 +4,7 @@ import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAuth0 } from "@auth0/auth0-react";
 import AuthSection from "./AuthSection";
+import ImageGallery from "./ImageGallery";
 import styled from 'styled-components';
 import './home.css'
 
@@ -83,7 +84,6 @@ export  function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [businessType, setBusinessType] = useState("அம்பிகை மாரியம்மன் அருளால் நலம் மற்றும் பாதுகாப்பு பெறுங்கள்.");
   const [animate, setAnimate] = useState(false);
-
   // hero-section text
   useEffect(() => {
     const interval = setInterval(() => {
@@ -290,21 +290,28 @@ export  function Home() {
         <StyledWrapper className='flex justify-center block relative p-4'>
           <Card  tabIndex="0">
             <img
-              src="/1.jpeg"
+              src="/mariamman_1.jpg"
               alt="Batman and VR headset"
               className="rounded-lg w-full block h-64"  
             />
           </Card>
           <Card tabIndex="0">
             <img
-              src="/2.jpeg"
+              src="/mariamman_2.jpg"
               alt="Batman and VR headset"
               className="rounded-l w-full block h-64" 
             />
           </Card>
           <Card  tabIndex="0">
             <img
-              src="/3.png"
+              src="/mariamman_3.jpg"
+              alt="Batman and VR headset"
+              className="rounded-lg w-full block h-64"  
+            />
+          </Card>
+          <Card  tabIndex="0">
+            <img
+              src="/mariyaman_4.jpg"
               alt="Batman and VR headset"
               className="rounded-lg w-full block h-64"  
             />
@@ -314,48 +321,37 @@ export  function Home() {
       </center>
 
       {/* slider */}
-      <div id="default-carousel" className="relative w-full" data-carousel="slide">
-          <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
-              <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/mariyaman.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-              </div>
-              <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/pngwing.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-              </div>
-              <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/3.png" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-              </div>
-              <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/pudhariaman.jpg" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-              </div>
-              <div className="hidden duration-700 ease-in-out" data-carousel-item>
-                  <img src="/kuluthiyaman.jpg" className="absolute block -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
-              </div>
-          </div>
-          <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-              <button type="button" className="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-              <button type="button" className="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5" data-carousel-slide-to="4"></button>
-          </div>
-          <button type="button" className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor"  strokeLinecap="round" strokeWidth="2" d="M5 1 1 5l4 4"/>
-                  </svg>
-                  <span className="sr-only">Previous</span>
-              </span>
-          </button>
-          <button type="button" className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                  <svg className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                      <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m1 9 4-4-4-4"/>
-                  </svg>
-                  <span className="sr-only">Next</span>
-              </span>
-          </button>
+      <div className="mx-auto mt-10 bg-white rounded-2xl shadow-lg overflow-hidden" style={{width: "80%"}}>
+      {/* Header Section */}
+      <div className="bg-green-500 text-white text-center py-4 text-2xl font-bold">
+        📂 Google Drive Image Gallery
       </div>
+
+      {/* Iframe Section */}
+      <div className="overflow-hidden">
+        <iframe
+          src="https://drive.google.com/embeddedfolderview?id=1LhOkUpjHz4nE-US3N9k_HYQ3Y2bTBT-O#grid"
+          className="w-full h-[500px] border-none"
+          title="Google Drive Folder"
+        ></iframe>
+      </div>
+
+      {/* Button Section */}
+      <div className="text-center py-5">
+        <a
+          href="https://drive.google.com/drive/folders/1LhOkUpjHz4nE-US3N9k_HYQ3Y2bTBT-O?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 text-white px-6 py-2 rounded-lg text-lg font-semibold shadow-md transition transform hover:scale-105 hover:bg-green-600"
+        >
+          🔗 View All Files
+        </a>
+      </div>
+      </div>
+
+      <ImageGallery/>
+      
+
 
       {/* main-section */}
       <div className='flex block justify-center'>
@@ -392,13 +388,13 @@ export  function Home() {
             </p>
           </div>
           <center>
-          <img src="/1.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" /> 
+          <img src="/1.jpeg" alt="Placeholder" className="rounded-lg order-1 md:order-none z-img" /> 
           </center>         
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 p-6 row gap-6 block items-center mt-10">
         <center>
-          <img src="/3.png" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />   
+          <img src="/3.png" alt="Placeholder" className="rounded-lg order-1 md:order-none z-img" />   
           </center>       
           <div>
             <p className="text-justify">
@@ -414,7 +410,7 @@ export  function Home() {
             </p>
           </div>
           <center>
-          <img src="/2.jpeg" alt="Placeholder" className="w-full rounded-lg order-1 md:order-none z-img" />
+          <img src="/2.jpeg" alt="Placeholder" className="rounded-lg order-1 md:order-none z-img" />
           </center>
         </div>
 

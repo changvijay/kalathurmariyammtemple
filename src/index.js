@@ -10,7 +10,6 @@ const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 const redirectUri =  window.location.origin;
 
 if (!domain || !clientId || !redirectUri) {
-  console.log(domain,clientId,redirectUri)
   console.error("Missing required environment variables for Auth0 configuration");
 }
 

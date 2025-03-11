@@ -82,8 +82,8 @@ ul li:nth-child(5) a:hover .fab {
 
 .block {
   animation: appear linear;
-  animation-timeline: view() !important;
-  animation-range: entry 0% !important;
+  animation-timeline: view();
+  animation-range: entry 0%;
 }
 .z-container{
   width: 80%;
