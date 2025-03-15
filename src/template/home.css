@@ -81,10 +81,24 @@ ul li:nth-child(5) a:hover .fab {
 }
 
 .block {
-  animation: appear linear;
+  /* Standard CSS animation with a duration (e.g., 1s) and forwards so it retains the end state */
+  animation: appear 1s linear forwards;
+  /* If you're using experimental scroll-linked animations */
   animation-timeline: view();
-  animation-range: entry 0%;
+  animation-range: entry 50%;
 }
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateX(-100%); /* Start off-screen to the left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0); /* End at the original position */
+  }
+}
+
 .z-container{
   width: 80%;
 }
