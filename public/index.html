@@ -35,6 +35,22 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            // Stop observing after the animation is triggered
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+      
+      document.querySelectorAll('.block').forEach(element => {
+        observer.observe(element);
+      });
+    });
+  </script>
   </body>
 </html>
